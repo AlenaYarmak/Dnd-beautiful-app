@@ -12,16 +12,16 @@ const InitialState = {
         'column-1': {
             id: 'column-1',
             title: 'To do',
-            taskIDs: ['task-1', 'task-2']
+            taskIds: ['task-1', 'task-2', 'task-3', 'task-4']
         },
-        'column-2': {
+        /* 'column-2': {
             id: 'column-2',
             title: 'In Progress',
             taskIDs: ['task-3', 'task-4']
-        }
+        } */
     },
     /* order columns */
-    columnOrder: ['column-1', 'column-2']
+    columnOrder: ['column-1'/* , 'column-2' */]
 }
 
 export default InitialState;
