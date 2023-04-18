@@ -20,8 +20,12 @@ class App extends Component {
       return;
     }
     if (destination.droppableId === source.droppableId) {
+      console.log(destination);
+      console.log(source);
       const column = this.state.columns[destination.droppableId];
-      const updTaskIds = this.state.columns[destination.droppableId].taskIds;
+      console.log(column);
+      const updTaskIds = column.taskIds;
+
       /* delete task from array */
       updTaskIds.splice(source.index, 1);
       /* add task draggableId to new place */
@@ -31,7 +35,7 @@ class App extends Component {
         ...column,
         taskIds: updTaskIds
       };
-      console.log(updColumn);
+
       const newState = {
         ...this.state,
         columns: {
@@ -39,8 +43,38 @@ class App extends Component {
           [updColumn.id]: updColumn
         }
       }
-      console.log(newState);
 
+      this.setState(newState);
+    }
+
+    if (destination.droppableId !== source.droppableId) {
+      const srcColumn = this.state.columns[source.droppableId];
+      const destColumn = this.state.columns[destination.droppableId];
+      const updSrcTaskIds = srcColumn.taskIds;
+      const updDestTaskIds = destColumn.taskIds;
+      console.log(updSrcTaskIds);
+      console.log(updDestTaskIds);
+      updSrcTaskIds.splice(source.index, 1);
+      updDestTaskIds.splice(destination.index, 0, draggableId);
+
+      const updSrcColumn = {
+        ...srcColumn,
+        taskIds: updSrcTaskIds
+      }
+
+      const updDestColumn = {
+        ...destColumn,
+        taskIds: updDestTaskIds
+      }
+
+      const newState = {
+        ...this.state,
+        columns: {
+          ...this.state.columns,
+          [updDestColumn.id]: updDestColumn,
+          [updSrcColumn.id]: updSrcColumn
+        }
+      }
       this.setState(newState);
     }
   }
