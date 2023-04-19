@@ -13,10 +13,9 @@ class Task extends Component {
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
                             ref={provided.innerRef}
-                            className='bg-light border border-success m-1 w-25'>{this.props.task.content}</div>
+                            className='bg-white mb-2 p-2 rounded'>{this.props.task.content}</div>
                     )}
             </Draggable>
-            
         )
     }
 }

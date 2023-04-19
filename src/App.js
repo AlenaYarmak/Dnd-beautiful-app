@@ -7,6 +7,7 @@ import Column from './Column'
 import './App.css';
 
 
+
 class App extends Component {
   state = InitialState;
 
@@ -20,10 +21,7 @@ class App extends Component {
       return;
     }
     if (destination.droppableId === source.droppableId) {
-      console.log(destination);
-      console.log(source);
       const column = this.state.columns[destination.droppableId];
-      console.log(column);
       const updTaskIds = column.taskIds;
 
       /* delete task from array */
@@ -52,8 +50,7 @@ class App extends Component {
       const destColumn = this.state.columns[destination.droppableId];
       const updSrcTaskIds = srcColumn.taskIds;
       const updDestTaskIds = destColumn.taskIds;
-      console.log(updSrcTaskIds);
-      console.log(updDestTaskIds);
+
       updSrcTaskIds.splice(source.index, 1);
       updDestTaskIds.splice(destination.index, 0, draggableId);
 
@@ -83,15 +80,23 @@ class App extends Component {
     return (
       /* our drag and drop area */
       /* we need to call only onDragEnd */
-      <DragDropContext
+      <div className='bg-primary-subtle w-100 vh-100'>
+        <div className='container h-50'>
+        <DragDropContext
         onDragEnd={this.onDragEnd}>
+          <div className='row row-cols-4 h-50 pt-5'>
         {this.state.columnOrder.map(columnId => {
         const column = this.state.columns[columnId];
         const tasks = column.taskIds.map(taskId => this.state.tasks[taskId]);
   
-        return <Column key={column.id} column={column} tasks={tasks}/>
+        return (
+            <Column key={column.id} column={column} tasks={tasks}/>
+          ) 
       })}
+        </div>
       </DragDropContext>
+        </div>
+      </div>
       
     )
   }
