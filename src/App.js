@@ -2,8 +2,10 @@ import React from 'react';
 import { Component } from 'react';
 /* import Button from 'react-bootstrap/Button'; */
 import { DragDropContext} from 'react-beautiful-dnd';
-import InitialState from './InitialState'
-import Column from './Column'
+import InitialState from './InitialState';
+import Column from './Column';
+import AddTask from './AddTask';
+
 import './App.css';
 
 
@@ -84,7 +86,7 @@ class App extends Component {
         <div className='container h-50'>
         <DragDropContext
         onDragEnd={this.onDragEnd}>
-          <div className='row row-cols-4 h-50 pt-5'>
+          <div className='row row-cols-4 pt-5'>
         {this.state.columnOrder.map(columnId => {
         const column = this.state.columns[columnId];
         const tasks = column.taskIds.map(taskId => this.state.tasks[taskId]);
@@ -95,6 +97,7 @@ class App extends Component {
       })}
         </div>
       </DragDropContext>
+        <AddTask />
         </div>
       </div>
       

@@ -8,7 +8,7 @@ class Column extends Component {
     render() {
         return (
                 <div className="bg-body-tertiary col m-2 h-auto">
-                    <h5 className="text-body-secondary m-2 pt-1">{this.props.column.title}</h5>
+                    <h5 className="text-body-secondary mr-2 pt-1">{this.props.column.title}</h5>
                     {/* Droppable has 1 required prop droppableId
                     Id needs to be unique*/}
                     <Droppable className="bg-primary" droppableId={this.props.column.id}
