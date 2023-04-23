@@ -4,7 +4,7 @@ import { Component } from 'react';
 import { DragDropContext} from 'react-beautiful-dnd';
 import InitialState from './InitialState';
 import Column from './Column';
-import AddTask from './AddTask';
+/* import AddTask from './AddTask'; */
 
 import './App.css';
 
@@ -12,6 +12,16 @@ import './App.css';
 
 class App extends Component {
   state = InitialState;
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      // Override the 'newTask' property from the initial state
+      newTask: '',
+      // Keep the other properties from the initial state
+      ...this.state,
+    };
+  }
 
   onDragEnd = (result) => {
     const {source, destination, draggableId} = result;
@@ -25,7 +35,6 @@ class App extends Component {
     if (destination.droppableId === source.droppableId) {
       const column = this.state.columns[destination.droppableId];
       const updTaskIds = column.taskIds;
-
       /* delete task from array */
       updTaskIds.splice(source.index, 1);
       /* add task draggableId to new place */
@@ -78,6 +87,63 @@ class App extends Component {
     }
   }
 
+  handleNewTaskChange = (e) => {
+    this.setState({ newTask: e.target.value });
+  }
+
+  makeId = () => {
+    let result = '';
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const charactersLength = characters.length;
+    let counter = 0;
+    while (counter < 8) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+      counter += 1;
+    }
+    return result;
+}
+
+  handleAddTask = (e) => {
+    const taskId = this.makeId();
+
+        const newTask = this.state.newTask;
+
+        const task = {id: taskId, content: newTask};
+        const newTaskIds = this.state.columns['column-1'].taskIds;
+        newTaskIds.push(taskId);
+
+        const test = {tasks: {
+          ...this.state.tasks,
+          taskId: task
+        }}
+        console.log(test);
+
+        const newState = {
+          tasks: {
+            ...this.state.tasks ,
+            [taskId]: task
+          },
+          columns: {
+            ...this.state.columns,
+            'column-1': {
+              id: 'column-1',
+              title: 'To do',
+              taskIds: newTaskIds
+            }
+          },
+          columnOrder: [...this.state.columnOrder]
+        }
+
+
+        /* this.setState(newState); */
+        
+        this.setState(newState, () => {
+          this.setState({ newTask: '' });
+        });
+        console.log(this.state);
+      }
+
+
   render() {
     return (
       /* our drag and drop area */
@@ -97,7 +163,21 @@ class App extends Component {
       })}
         </div>
       </DragDropContext>
-        <AddTask />
+      <div className="input-group mb-3 w-25 mt-3">
+                <input 
+                type="text" 
+                className="form-control" 
+                placeholder="Enter your task" 
+                aria-label="Enter your task" 
+                aria-describedby="button-addon2"
+                value={this.state.newTask}
+                onChange={this.handleNewTaskChange}></input>
+                <button 
+                className="btn btn-light btn-outline-dark" 
+                type="button" 
+                id="button-addon2"
+                onClick={this.handleAddTask}>Add Task</button>
+            </div>
         </div>
       </div>
       
