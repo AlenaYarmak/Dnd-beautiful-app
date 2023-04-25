@@ -143,6 +143,28 @@ class App extends Component {
         console.log(this.state);
       }
 
+      handleDeleteTask = (taskId) => {
+        /* console.log(taskId); */
+        this.setState((prevState) => {
+          // Create a new object with all tasks except for the deleted task
+          const tasks = Object.keys(prevState.tasks)
+            .filter((id) => id !== taskId)
+            .reduce((obj, id) => {
+              obj[id] = prevState.tasks[id];
+              return obj;
+            }, {});
+    
+          // Remove the deleted task from all columns
+          const columns = Object.keys(prevState.columns).reduce((obj, columnId) => {
+            const column = prevState.columns[columnId];
+            const taskIds = column.taskIds.filter((id) => id !== taskId);
+            obj[columnId] = { ...column, taskIds };
+            return obj;
+          }, {});
+    
+          return { tasks, columns };
+        });
+      }
 
   render() {
     return (
@@ -158,7 +180,7 @@ class App extends Component {
         const tasks = column.taskIds.map(taskId => this.state.tasks[taskId]);
   
         return (
-            <Column key={column.id} column={column} tasks={tasks}/>
+            <Column key={column.id} column={column} tasks={tasks} onDeleteTask={this.handleDeleteTask}/>
           ) 
       })}
         </div>

@@ -5,6 +5,11 @@ import Task from './Task';
 
 
 class Column extends Component {
+    handleDeleteTask = (taskId) => {
+        if (this.props.onDeleteTask) {
+            this.props.onDeleteTask(taskId);
+          }
+    }
     render() {
         return (
                 <div className="bg-body-tertiary col m-2 h-auto">
@@ -19,7 +24,7 @@ class Column extends Component {
                                 ref={provided.innerRef}
                                 {...provided.droppableProps}>
                                 {this.props.tasks.map((task, index) => (
-                                <Task key={task.id} index={index} task={task}></Task>))}
+                                <Task key={task.id} index={index} task={task} onDeleteTask={this.handleDeleteTask}></Task>))}
                                 {provided.placeholder}
                             </div>
                         )}
