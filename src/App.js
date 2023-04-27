@@ -140,7 +140,6 @@ class App extends Component {
         this.setState(newState, () => {
           this.setState({ newTask: '' });
         });
-        console.log(this.state);
       }
 
       handleDeleteTask = (taskId) => {
@@ -151,6 +150,7 @@ class App extends Component {
             .filter((id) => id !== taskId)
             .reduce((obj, id) => {
               obj[id] = prevState.tasks[id];
+              console.log(obj);
               return obj;
             }, {});
     

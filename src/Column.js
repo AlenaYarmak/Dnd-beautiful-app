@@ -8,6 +8,7 @@ class Column extends Component {
     handleDeleteTask = (taskId) => {
         if (this.props.onDeleteTask) {
             this.props.onDeleteTask(taskId);
+            console.log(this.props.onDeleteTask);
           }
     }
     render() {
