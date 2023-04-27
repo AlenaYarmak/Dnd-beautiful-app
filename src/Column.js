@@ -7,6 +7,7 @@ import Task from './Task';
 class Column extends Component {
     handleDeleteTask = (taskId) => {
         if (this.props.onDeleteTask) {
+            /* If onDeleteTask does exist, we call it with the taskId argument.  */
             this.props.onDeleteTask(taskId);
             console.log(this.props.onDeleteTask);
           }

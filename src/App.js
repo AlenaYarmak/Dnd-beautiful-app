@@ -4,7 +4,7 @@ import { Component } from 'react';
 import { DragDropContext} from 'react-beautiful-dnd';
 import InitialState from './InitialState';
 import Column from './Column';
-/* import AddTask from './AddTask'; */
+import AddTask from './AddTask';
 
 import './App.css';
 
@@ -20,6 +20,7 @@ class App extends Component {
       newTask: '',
       // Keep the other properties from the initial state
       ...this.state,
+
     };
   }
 
@@ -103,8 +104,8 @@ class App extends Component {
     return result;
 }
 
-  handleAddTask = (e) => {
-    const newTask = this.state.newTask;
+  handleAddTask = (newTask) => {
+    newTask = newTask.trim();
       if (newTask) {
         const taskId = this.makeId();
         const task = {id: taskId, content: newTask};
@@ -130,11 +131,7 @@ class App extends Component {
           this.setState({ newTask: '' });
         });
       }
-        /* const test = {tasks: {
-          ...this.state.tasks,
-          taskId: task
-        }} */
-      }
+    }
 
       handleDeleteTask = (taskId) => {
         /* console.log(taskId); */
@@ -179,21 +176,7 @@ class App extends Component {
       })}
         </div>
       </DragDropContext>
-      <div className="input-group mb-3 w-25 mt-3">
-                <input 
-                type="text" 
-                className="form-control" 
-                placeholder="Enter your task" 
-                aria-label="Enter your task" 
-                aria-describedby="button-addon2"
-                value={this.state.newTask}
-                onChange={this.handleNewTaskChange}></input>
-                <button 
-                className="btn btn-light btn-outline-dark" 
-                type="button" 
-                id="button-addon2"
-                onClick={this.handleAddTask}>Add Task</button>
-            </div>
+      <AddTask onChange={this.handleNewTaskChange} onClick={this.handleAddTask}/>
         </div>
       </div>
       

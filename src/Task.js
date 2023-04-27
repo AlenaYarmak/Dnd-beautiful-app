@@ -18,7 +18,6 @@ class Task extends Component {
          this.setState({ isHovered: false });
      }
 
-     
     render() {
         
         const { task, onDeleteTask } = this.props;
@@ -29,7 +28,6 @@ class Task extends Component {
             <Draggable
                 draggableId={this.props.task.id}
                 index={this.props.index}
-                
                 >
                     {provided => (
 
@@ -45,7 +43,6 @@ class Task extends Component {
                             >Delete</button>
                             </div>
 
-                     
                     )}
             </Draggable>
         )
