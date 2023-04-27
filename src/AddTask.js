@@ -20,7 +20,12 @@ class AddTask extends Component {
       this.props.onClick(newTask);
       this.setState({ newTask: '' });
     }
-    console.log(newTask);
+  }
+
+  handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      this.handleAddTask();
+    }
   }
   
   render() {
@@ -33,6 +38,7 @@ class AddTask extends Component {
               aria-label="Enter your task" 
               aria-describedby="button-addon2"
               onChange={this.handleNewTaskChange}
+              onKeyDown={this.handleKeyDown}
               /* add value to empty input after click => this.setState({ newTask: '' })*/
               value={this.state.newTask}
         />
