@@ -104,19 +104,12 @@ class App extends Component {
 }
 
   handleAddTask = (e) => {
-    const taskId = this.makeId();
-
-        const newTask = this.state.newTask;
-
+    const newTask = this.state.newTask;
+      if (newTask) {
+        const taskId = this.makeId();
         const task = {id: taskId, content: newTask};
         const newTaskIds = this.state.columns['column-1'].taskIds;
         newTaskIds.push(taskId);
-
-        const test = {tasks: {
-          ...this.state.tasks,
-          taskId: task
-        }}
-        console.log(test);
 
         const newState = {
           tasks: {
@@ -133,13 +126,14 @@ class App extends Component {
           },
           columnOrder: [...this.state.columnOrder]
         }
-
-
-        /* this.setState(newState); */
-        
         this.setState(newState, () => {
           this.setState({ newTask: '' });
         });
+      }
+        /* const test = {tasks: {
+          ...this.state.tasks,
+          taskId: task
+        }} */
       }
 
       handleDeleteTask = (taskId) => {
