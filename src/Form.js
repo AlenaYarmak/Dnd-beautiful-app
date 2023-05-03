@@ -5,8 +5,9 @@ import { Component } from "react";
 class Form extends Component {
     render() {
         return(
-            <>
-                <h1>Login form</h1>
+        <div className='d-flex justify-content-center'>
+            <div className="bg-light rounded p-4 w-25">
+                <h1 className="m-2 d-flex justify-content-center">Login</h1>
                 <Formik
                    initialValues={{ email: '', password: '' }}
                    validate={values => {
@@ -37,8 +38,12 @@ class Form extends Component {
                      isSubmitting,
                      /* and other goodies */
                    }) => (
-                     <form onSubmit={handleSubmit}>
+                     <form 
+                        className='form-group d-flex flex-column align-items-center'
+                        onSubmit={handleSubmit}>
                        <input
+                         className="form-control m-2"
+                         placeholder="Enter email"
                          type="email"
                          name="email"
                          onChange={handleChange}
@@ -47,6 +52,8 @@ class Form extends Component {
                        />
                        {errors.email && touched.email && errors.email}
                        <input
+                         className="form-control m-2"
+                         placeholder="Password"
                          type="password"
                          name="password"
                          onChange={handleChange}
@@ -54,13 +61,16 @@ class Form extends Component {
                          value={values.password}
                        />
                        {errors.password && touched.password && errors.password}
-                       <button type="submit" disabled={isSubmitting}>
+                       <button
+                         className="btn btn-primary m-2 w-100"
+                         type="submit" disabled={isSubmitting}>
                          Submit
                        </button>
                      </form>
                    )}
                  </Formik>
-            </>
+            </div>
+        </div>
         )
     }
 }
