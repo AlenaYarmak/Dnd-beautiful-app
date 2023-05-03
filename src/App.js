@@ -5,6 +5,7 @@ import { DragDropContext} from 'react-beautiful-dnd';
 import InitialState from './InitialState';
 import Column from './Column';
 import AddTask from './AddTask';
+import Form from './Form';
 
 import './App.css';
 
@@ -178,6 +179,7 @@ class App extends Component {
       </DragDropContext>
       <AddTask onChange={this.handleNewTaskChange} onClick={this.handleAddTask}/>
         </div>
+        <Form />
       </div>
       
     )
