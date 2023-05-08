@@ -1,6 +1,6 @@
-import React from "react";
-import { Component } from "react";
-import { Draggable } from "react-beautiful-dnd";
+import React from 'react';
+import { Component } from 'react';
+import { Draggable } from 'react-beautiful-dnd';
 
 class Task extends Component {
     constructor(props) {

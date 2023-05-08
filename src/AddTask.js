@@ -1,5 +1,5 @@
-import React from "react";
-import { Component } from "react";
+import React from 'react';
+import { Component } from 'react';
 
 
 class AddTask extends Component {
@@ -30,22 +30,22 @@ class AddTask extends Component {
   
   render() {
     return (
-      <div className="input-group mb-3 w-25 mt-3">
+      <div className='input-group mb-3 w-25 mt-3'>
         <input 
-              type="text" 
-              className="form-control" 
-              placeholder="Enter your task" 
-              aria-label="Enter your task" 
-              aria-describedby="button-addon2"
+              type='text' 
+              className='form-control' 
+              placeholder='Enter your task' 
+              aria-label='Enter your task' 
+              aria-describedby='button-addon2'
               onChange={this.handleNewTaskChange}
               onKeyDown={this.handleKeyDown}
               /* add value to empty input after click => this.setState({ newTask: '' })*/
               value={this.state.newTask}
         />
         <button 
-              className="btn btn-light btn-outline-dark" 
-              type="button" 
-              id="button-addon2"
+              className='btn btn-light btn-outline-dark' 
+              type='button' 
+              id='button-addon2'
               onClick={this.handleAddTask}
         >
               Add Task
