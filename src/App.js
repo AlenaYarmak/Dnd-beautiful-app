@@ -7,6 +7,7 @@ import InitialState from './InitialState';
 import Column from './Column';
 import AddTask from './AddTask';
 import Form from './Form';
+import SignOut from './SignOut';
 
 import './App.css';
 
@@ -170,6 +171,7 @@ class App extends Component {
 
           <div className='bg-primary-subtle w-100 vh-100'>
             <div className='container h-50'>
+              <SignOut />
               <DragDropContext onDragEnd={this.onDragEnd}>
                 <div className='row row-cols-4 pt-5'>
                   {this.state.columnOrder.map((columnId) => {
