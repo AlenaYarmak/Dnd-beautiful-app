@@ -37,7 +37,7 @@ class SignOut extends Component {
             transition: 'border .3s ease-in-out'
           };
         const pStyles = {
-            'padding-right': '15px', 
+            paddingRight: '15px', 
             color: '#000', 
             fontWeight: '700'
         }
