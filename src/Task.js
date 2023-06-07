@@ -1,6 +1,11 @@
 import React from 'react';
 import { Component } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
+import styled from 'styled-components';
+
+const Container = styled.div`
+    background-color: ${props => (props.isDragging ? 'lightgreen' : 'white')};
+`;
 
 class Task extends Component {
     constructor(props) {
@@ -10,13 +15,14 @@ class Task extends Component {
         }
     }
 
-     handleMouseEnter = () => {
+    //button function
+    handleMouseEnter = () => {
         this.setState({ isHovered: true });
-     }
+    }
 
-     handleMouseLeave = () => {
-         this.setState({ isHovered: false });
-     }
+    handleMouseLeave = () => {
+        this.setState({ isHovered: false });
+    }
 
     render() {
         
@@ -29,19 +35,20 @@ class Task extends Component {
                 draggableId={this.props.task.id}
                 index={this.props.index}
                 >
-                    {provided => (
+                    {(provided, snapshot) => (
 
-                            <div
+                            <Container
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
                             ref={provided.innerRef}
+                            isDragging={snapshot.isDragging}
                             className='bg-white mb-2 p-2 rounded d-flex justify-content-between align-items-center'>{this.props.task.content}
                             <button onClick={() => onDeleteTask(task.id)}
                             onMouseEnter={this.handleMouseEnter}
                             onMouseLeave={this.handleMouseLeave}
                             className={buttonStyle}
                             >Delete</button>
-                            </div>
+                            </Container>
 
                     )}
             </Draggable>
